@@ -51,6 +51,10 @@
     <Compile Include="FormAssets\Match.cs" />
     <Compile Include="FormAssets\RowComparer.cs" />
     <Compile Include="FormAssets\ListViewColumnClassv2.cs" />
+    <Compile Include="RoundRobinAssets\Match.cs" />
+    <Compile Include="RoundRobinAssets\Round.cs" />
+    <Compile Include="RoundRobinAssets\Team.cs" />
+    <Compile Include="RoundRobinAssets\Tournament.cs" />
     <Compile Include="SportsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,5 +89,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

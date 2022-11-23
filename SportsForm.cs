@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyFirstForm.FormAssets;
+using MyFirstForm.RoundRobinAssets;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -109,6 +110,13 @@ namespace MyFirstForm
             ResetRadioButtons();
             ResetSpinBoxes();
             FillRadioButtons();
+
+            Tournament tourny = new Tournament();
+            tourny.createAllTeamData();
+            tourny.TournamentScheduler();
+
+
+
         }
 
         // 
