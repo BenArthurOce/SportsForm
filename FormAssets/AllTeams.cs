@@ -17,11 +17,6 @@ namespace MyFirstForm.FormAssets
             AllTeamsDictionary = _AllTeamsDictionary;
         }
 
-     //   public AllTeams2(IDictionary<string, TeamClass> _AllTeamsDictionary)
-     //   {
-     //       AllTeamsDictionary = _AllTeamsDictionary;
-     //   }
-
 
         // The Team Class is created here. This block of code contains the 8 teams
         public void createAllTeamData()
@@ -35,21 +30,15 @@ namespace MyFirstForm.FormAssets
                 string teamName = tempTestList[i];
                 TeamClass newTeam = new TeamClass(i, teamName, 0, 0, 0, 0, 0);
 
-                this.AllTeamsDictionary.Add(newTeam.teamName.ToString(), newTeam);
+                this.AllTeamsDictionary.Add(newTeam.teamName, newTeam);
             }
         }
 
         public IList<string> GetListOfTeamNames()
         {
-            IList<string> listOfNames = new List<string>();
-
-            foreach (KeyValuePair<string, TeamClass> entry in this.AllTeamsDictionary)
-            {
-                listOfNames.Add(entry.Key.ToString());
-            }
-            return listOfNames;
+            List<string> keyList = new List<string>(this.AllTeamsDictionary.Keys);
+            return keyList;
         }
-
 
         public IList<string> ShuffuleTeamList()
         {
@@ -63,27 +52,26 @@ namespace MyFirstForm.FormAssets
 
         public void IncreasePointsFor(string teamName, int amount)
         {
-            this.AllTeamsDictionary[teamName.ToString()].pointsFor += amount;
+            this.AllTeamsDictionary[teamName].pointsFor += amount;
         }
 
         public void IncreasePointsAgainst(string teamName, int amount)
         {
-            this.AllTeamsDictionary[teamName.ToString()].pointsAgainst += amount;
+            this.AllTeamsDictionary[teamName].pointsAgainst += amount;
         }
 
         public void IncreaseLeaguePoints(string teamName, int amount)
         {
-            this.AllTeamsDictionary[teamName.ToString()].leagueScore += amount;
+            this.AllTeamsDictionary[teamName].leagueScore += amount;
         }
 
         public void CalculatePercentage(string teamName)
         {
-            float pointsFor = this.AllTeamsDictionary[teamName.ToString()].pointsFor;
-            float pointsAgainst = this.AllTeamsDictionary[teamName.ToString()].pointsAgainst;
+            float pointsFor = this.AllTeamsDictionary[teamName].pointsFor;
+            float pointsAgainst = this.AllTeamsDictionary[teamName].pointsAgainst;
 
             decimal result = (decimal)(pointsFor / pointsAgainst);
-
-            this.AllTeamsDictionary[teamName.ToString()].pointsPercentage = Math.Round(result,2);
+            this.AllTeamsDictionary[teamName].pointsPercentage = Math.Round(result,2);
         }
     }
 

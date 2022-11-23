@@ -265,11 +265,13 @@ namespace MyFirstForm
             gridViewLadder.Rows[n].Cells[3].Value = PointsAgainst;      //PointsAgainst
             gridViewLadder.Rows[n].Cells[4].Value = Percentage;         //Percentage
             gridViewLadder.Rows[n].Cells[5].Value = LeaguePoints;       //LeaguePoints
-
-
         }
 
-
+        // Clears the Ladder
+        private void ClearLadder()
+        {
+            gridViewLadder.Rows.Clear();
+        }
 
 
 
