@@ -51,6 +51,7 @@
     <Compile Include="FormAssets\Match.cs" />
     <Compile Include="FormAssets\RowComparer.cs" />
     <Compile Include="FormAssets\ListViewColumnClassv2.cs" />
+    <Compile Include="RoundRobinAssets\DataCentre.cs" />
     <Compile Include="RoundRobinAssets\Match.cs" />
     <Compile Include="RoundRobinAssets\Round.cs" />
     <Compile Include="RoundRobinAssets\Team.cs" />

@@ -9,6 +9,7 @@ namespace MyFirstForm.RoundRobinAssets
     class Match
     {
 
+        public int MatchNumber { set; get; }
         public Team TeamA { set; get; }
         public Team TeamB { set; get; }
 

@@ -20,8 +20,9 @@ namespace MyFirstForm
         // List that contains information for dictionaries, Lists, Teams
         private AllTeams AllTeamClass = new AllTeams(new List<TeamClass>(), new Dictionary<string, TeamClass>());
 
-      //  private AllTeams AllTeamClass2 = new AllTeams( new Dictionary<string, TeamClass>());
+        //  private AllTeams AllTeamClass2 = new AllTeams( new Dictionary<string, TeamClass>());
 
+        Tournament tourny = new Tournament();
 
         // Radiobutton List
         private IList<RadioButton> ListRadioButtons = new List<RadioButton>();
@@ -109,14 +110,38 @@ namespace MyFirstForm
             btnSubmitScores.Visible = true;
             ResetRadioButtons();
             ResetSpinBoxes();
-            FillRadioButtons();
+            // FillRadioButtons();
 
-            Tournament tourny = new Tournament();
-            tourny.createAllTeamData();
-            tourny.TournamentScheduler();
+            tourny.IncreaseRoundByOne();
 
 
 
+            int i = 0;
+            i = tourny.CurrentRound;
+            // i = tourny.CurrentRound;
+
+            FillFormRadioButtons(i);
+
+
+        }
+
+        private void FillFormRadioButtons(int i)
+        {
+            int m = 0;
+            foreach (GroupBox grpBox in Controls.OfType<GroupBox>())
+            {
+
+                List<RadioButton> ListRadioButtonsMatch = new List<RadioButton>();
+                foreach (RadioButton rBtn in grpBox.Controls.OfType<RadioButton>())
+                {
+                    ListRadioButtonsMatch.Add(rBtn);
+                }
+
+                ListRadioButtonsMatch[0].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamA.teamName.ToString();
+                ListRadioButtonsMatch[1].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamB.teamName.ToString();
+
+                m += 1;
+            }
         }
 
         // 
