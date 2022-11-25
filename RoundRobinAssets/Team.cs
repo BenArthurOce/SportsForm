@@ -8,22 +8,22 @@ namespace MyFirstForm.RoundRobinAssets
 
 {    class Team
     {
-        public int refNumber { set; get; }
-        public string teamName { set; get; }
-        public int pointsFor { set; get; }
-        public int pointsAgainst { set; get; }
-        public decimal pointsPercentage { set; get; }
-        public int leagueScore { set; get; }
+        public int RefNumber { set; get; }
+        public string TeamName { set; get; }
+        public int PointsFor { set; get; }
+        public int PointsAgainst { set; get; }
+        public decimal PointsPercentage { set; get; }
+        public int LeagueScore { set; get; }
 
         // Create a class constructor with multiple parameters
         public Team(int _refNumber, string _teamName, int _pointsFor, int _pointsAgainst, decimal _pointsPercentage, int _leagueScore)
         {
-            this.refNumber = _refNumber;
-            this.teamName = _teamName;
-            this.pointsFor = _pointsFor;
-            this.pointsAgainst = _pointsAgainst;
-            this.pointsPercentage = _pointsPercentage;
-            this.leagueScore = _leagueScore;
+            this.RefNumber = _refNumber;
+            this.TeamName = _teamName;
+            this.PointsFor = _pointsFor;
+            this.PointsAgainst = _pointsAgainst;
+            this.PointsPercentage = _pointsPercentage;
+            this.LeagueScore = _leagueScore;
         }
     }
 }

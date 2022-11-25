@@ -120,6 +120,8 @@ namespace MyFirstForm
             i = tourny.CurrentRound;
             // i = tourny.CurrentRound;
 
+         //   MessageBox.Show(tourny.CurrentRound.ToString());
+
             FillFormRadioButtons(i);
 
 
@@ -137,8 +139,8 @@ namespace MyFirstForm
                     ListRadioButtonsMatch.Add(rBtn);
                 }
 
-                ListRadioButtonsMatch[0].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamA.teamName.ToString();
-                ListRadioButtonsMatch[1].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamB.teamName.ToString();
+                ListRadioButtonsMatch[0].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamA.TeamName.ToString();
+                ListRadioButtonsMatch[1].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamB.TeamName.ToString();
 
                 m += 1;
             }

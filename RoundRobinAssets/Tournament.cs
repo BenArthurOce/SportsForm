@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyFirstForm.RoundRobinAssets
 {
@@ -34,7 +35,6 @@ namespace MyFirstForm.RoundRobinAssets
             this.NumberOfRounds = 7;
             this.ListOfRounds = new List<Round>();
             this.ListOfTeams = new List<Team>();
-
             this.ListOfTeams = createAllTeamData();
             TournamentScheduler();
         }
@@ -60,19 +60,13 @@ namespace MyFirstForm.RoundRobinAssets
             return this.ListOfTeams;
         }
 
-
-        public List<Team> ShuffuleTeamList_old()
+        public IList<Team> ShuffuleTeamList()
         {
             Random rand = new Random();
-            List<Team> shuffled1 = this.ListOfTeams;
-            List<Team> shuffled2 = shuffled1.OrderBy(_ => rand.Next()).ToList();
-            return shuffled2;
-        }
-
-        public void ShuffuleTeamList()
-        {
-            Random rand = new Random();
-            this.ListOfTeams.OrderBy(_ => rand.Next()).ToList();
+            IList<Team> shuffled1 = this.ListOfTeams;
+            IList<Team> shuffled2 = shuffled1.OrderBy(_ => rand.Next()).ToList();
+            IList<Team> shuffled3 = shuffled2.OrderBy(i => Guid.NewGuid()).ToList();
+            return (IList<Team>)shuffled3;
         }
 
         public void TournamentScheduler()
@@ -84,7 +78,8 @@ namespace MyFirstForm.RoundRobinAssets
                 // we shuffle the list
                 // List<Team> ShuffledList = ShuffuleTeamList();
 
-                ShuffuleTeamList();
+                this.ListOfTeams = (List<Team>)ShuffuleTeamList();
+
 
                 // get a round and add it
                 Round NewRound = new Round(i);
