@@ -71,15 +71,10 @@ namespace MyFirstForm.RoundRobinAssets
 
         public void TournamentScheduler()
         {
-            for (int i = 0; i < this.NumberOfRounds; i++)
+            for (int i = -1; i < this.NumberOfRounds; i++)
             {
 
-                // we get the list
-                // we shuffle the list
-                // List<Team> ShuffledList = ShuffuleTeamList();
-
                 this.ListOfTeams = (List<Team>)ShuffuleTeamList();
-
 
                 // get a round and add it
                 Round NewRound = new Round(i);

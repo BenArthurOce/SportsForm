@@ -113,17 +113,8 @@ namespace MyFirstForm
             // FillRadioButtons();
 
             tourny.IncreaseRoundByOne();
-
-
-
-            int i = 0;
-            i = tourny.CurrentRound;
-            // i = tourny.CurrentRound;
-
-         //   MessageBox.Show(tourny.CurrentRound.ToString());
-
-            FillFormRadioButtons(i);
-
+            lblRoundInt.Text = tourny.CurrentRound.ToString();
+            FillFormRadioButtons(tourny.CurrentRound);
 
         }
 

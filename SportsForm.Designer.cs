@@ -52,7 +52,6 @@ namespace MyFirstForm
             this.btnNewRound = new System.Windows.Forms.Button();
             this.btnSubmitScores = new System.Windows.Forms.Button();
             this.btnRandomScores = new System.Windows.Forms.Button();
-            this.btnScoresOnly = new System.Windows.Forms.Button();
             this.gridViewLadder = new System.Windows.Forms.DataGridView();
             this.LadderPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LadderTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +62,8 @@ namespace MyFirstForm
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblRoundString = new System.Windows.Forms.Label();
+            this.lblRoundInt = new System.Windows.Forms.Label();
             this.grpBoxGame1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame1Team1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame1Team2)).BeginInit();
@@ -332,13 +333,6 @@ namespace MyFirstForm
             this.btnRandomScores.UseVisualStyleBackColor = true;
             this.btnRandomScores.Click += new System.EventHandler(this.btnRandomScores_Click);
             // 
-            // btnScoresOnly
-            // 
-            this.btnScoresOnly.Location = new System.Drawing.Point(0, 0);
-            this.btnScoresOnly.Name = "btnScoresOnly";
-            this.btnScoresOnly.Size = new System.Drawing.Size(75, 23);
-            this.btnScoresOnly.TabIndex = 13;
-            // 
             // gridViewLadder
             // 
             this.gridViewLadder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -420,14 +414,34 @@ namespace MyFirstForm
             this.Column2.HeaderText = "Column2";
             this.Column2.Name = "Column2";
             // 
+            // lblRoundString
+            // 
+            this.lblRoundString.AutoSize = true;
+            this.lblRoundString.Location = new System.Drawing.Point(19, 24);
+            this.lblRoundString.Name = "lblRoundString";
+            this.lblRoundString.Size = new System.Drawing.Size(42, 13);
+            this.lblRoundString.TabIndex = 15;
+            this.lblRoundString.Text = "Round:";
+            this.lblRoundString.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // lblRoundInt
+            // 
+            this.lblRoundInt.AutoSize = true;
+            this.lblRoundInt.Location = new System.Drawing.Point(93, 24);
+            this.lblRoundInt.Name = "lblRoundInt";
+            this.lblRoundInt.Size = new System.Drawing.Size(13, 13);
+            this.lblRoundInt.TabIndex = 16;
+            this.lblRoundInt.Text = "0";
+            // 
             // SportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1335, 534);
+            this.Controls.Add(this.lblRoundInt);
+            this.Controls.Add(this.lblRoundString);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.gridViewLadder);
-            this.Controls.Add(this.btnScoresOnly);
             this.Controls.Add(this.btnRandomScores);
             this.Controls.Add(this.btnSubmitScores);
             this.Controls.Add(this.grpBoxGame1);
@@ -458,6 +472,7 @@ namespace MyFirstForm
             ((System.ComponentModel.ISupportInitialize)(this.gridViewLadder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -490,7 +505,6 @@ namespace MyFirstForm
         private System.Windows.Forms.NumericUpDown spinbxGame4Team2;
 
         private System.Windows.Forms.Button btnRandomScores;
-        private System.Windows.Forms.Button btnScoresOnly;
 
         private System.Windows.Forms.DataGridView gridViewLadder;
         private System.Windows.Forms.DataGridViewTextBoxColumn LadderPos;
@@ -502,6 +516,8 @@ namespace MyFirstForm
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Label lblRoundString;
+        private System.Windows.Forms.Label lblRoundInt;
     }
 }
 
