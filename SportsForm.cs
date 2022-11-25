@@ -116,6 +116,30 @@ namespace MyFirstForm
             lblRoundInt.Text = tourny.CurrentRound.ToString();
             FillFormRadioButtons(tourny.CurrentRound);
 
+
+
+            // Testing Multi Key Dictionary
+
+            var TestDict = new Dictionary<(int, int), string>();
+
+            // Add
+            TestDict.Add((1, 2), "onetwo");
+            TestDict.Add((2, 4), "twofour");
+            TestDict.Add((1, 7), "oneseven");
+
+            // Get
+            string a = TestDict[(1, 7)];
+
+            // Multi Key Dictionary
+            // The two keys (int) are round number and match number
+            // The value is yet to be determind but it needs to be winningTeam,LosingTeam,WinningScore,LosingScore
+            // Don't make the value a class, as the raw dictionary data could maybe be dataset in the future?
+
+            tourny.MatchHistory.Add((3, 2), "threetwo");
+            tourny.MatchHistory.Add((4, 5), "fourfive");
+            string b = tourny.MatchHistory[(4, 5)];
+            MessageBox.Show(b);
+
         }
 
         private void FillFormRadioButtons(int i)

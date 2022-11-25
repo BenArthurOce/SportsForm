@@ -14,6 +14,9 @@ namespace MyFirstForm.RoundRobinAssets
         public int NumberOfRounds { get; set; }
         public List<Round> ListOfRounds { get; set; }
         public List<Team> ListOfTeams { get; set; }
+
+        public Dictionary<(int, int), string> MatchHistory { get; set; }
+
         //   public int Schedule { get; set; }
         // Needs to hold all the rounds
         // Needs to Schedule the matches?
@@ -36,6 +39,7 @@ namespace MyFirstForm.RoundRobinAssets
             this.ListOfRounds = new List<Round>();
             this.ListOfTeams = new List<Team>();
             this.ListOfTeams = createAllTeamData();
+            this.MatchHistory = new Dictionary<(int, int), string>();
             TournamentScheduler();
         }
 
