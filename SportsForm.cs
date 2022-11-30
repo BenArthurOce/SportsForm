@@ -116,7 +116,20 @@ namespace MyFirstForm
             lblRoundInt.Text = tourny.CurrentRound.ToString();
             FillFormRadioButtons(tourny.CurrentRound);
 
+            DataSportsResults.LeagueLadderDataTable dtc = new DataSportsResults.LeagueLadderDataTable();
+            DataSportsResults.LeagueLadderRow dr = dtc.NewLeagueLadderRow();
+            dr["Team"] = "Jetsons";
+            dtc.Rows.Add(dr);
 
+            foreach (DataRow r in dtc.Rows)
+
+                Console.WriteLine("Result = {0} {1} {2} {3} {4} {5} {6} {7} {8}", r["Team"], r["MatchesPlayed"], r["GamesWon"], r["GamesDrawn"], r["GamesLost"], r["GoalsFor"], r["GoalsAgainst"], r["GoalDifference"], r["LeaguePoints"]);
+
+            Console.Read();
+
+
+
+            /*
 
             // Testing Multi Key Dictionary
 
@@ -139,6 +152,8 @@ namespace MyFirstForm
             tourny.MatchHistory.Add((4, 5), "fourfive");
             string b = tourny.MatchHistory[(4, 5)];
             MessageBox.Show(b);
+
+            */
 
         }
 

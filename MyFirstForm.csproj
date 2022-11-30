@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSportsResults.cs">
+      <DependentUpon>DataSportsResults.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSportsResults.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSportsResults.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FormAssets\AllTeams.cs" />
     <Compile Include="FormAssets\Ladder.cs" />
     <Compile Include="FormAssets\Match.cs" />
@@ -77,6 +85,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="DataSportsResults.xsc">
+      <DependentUpon>DataSportsResults.xsd</DependentUpon>
+    </None>
+    <None Include="DataSportsResults.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSportsResults.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSportsResults.xss">
+      <DependentUpon>DataSportsResults.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
