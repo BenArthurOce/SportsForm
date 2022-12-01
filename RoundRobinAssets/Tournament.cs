@@ -133,34 +133,35 @@ namespace MyFirstForm.RoundRobinAssets
             IList<String> ListAllTeams = new List<String>();
             foreach (DataRow r in dtTeamNames.Rows)
             {
-                ListAllTeams.Add(r["TeamName"].ToString());
+                ListAllTeams.Add(r["TeamId"].ToString());
             }
 
-            for (int i = -1; i < this.NumberOfRounds; i++)
+
+            // match number
+            int j = 1;
+
+            for (int i = 1; i < this.NumberOfRounds+1; i++)
             {
 
                 // Shuffle Team List
                 Random rand = new Random();
                 IList<String> ShuffledTeamList = ListAllTeams.OrderBy(_ => rand.Next()).ToList();
 
-
-                DataSportsResults.MatchHistoryRow dr1 = dtMatchHistory.NewMatchHistoryRow();
-                DataSportsResults.MatchHistoryRow dr2 = dtMatchHistory.NewMatchHistoryRow();
-                DataSportsResults.MatchHistoryRow dr3 = dtMatchHistory.NewMatchHistoryRow();
-                DataSportsResults.MatchHistoryRow dr4 = dtMatchHistory.NewMatchHistoryRow();
-
+                AddMatchToMatchHistoryDataSet(
+                    j, i, 1, ShuffledTeamList[0], 0, ShuffledTeamList[1], 0, false, false, false);
+                    j += 1;
 
                 AddMatchToMatchHistoryDataSet(
-                    i, 1, 1, ShuffledTeamList[0], 0, ShuffledTeamList[1], 0, false, false, false);
+                    j, i, 2, ShuffledTeamList[2], 0, ShuffledTeamList[3], 0, false, false, false);
+                    j += 1;
 
                 AddMatchToMatchHistoryDataSet(
-                    i, 1, 2, ShuffledTeamList[2], 0, ShuffledTeamList[3], 0, false, false, false);
+                    j, i, 3, ShuffledTeamList[4], 0, ShuffledTeamList[5], 0, false, false, false);
+                    j += 1;
 
                 AddMatchToMatchHistoryDataSet(
-                    i, 1, 3, ShuffledTeamList[4], 0, ShuffledTeamList[5], 0, false, false, false);
-
-                AddMatchToMatchHistoryDataSet(
-                    i, 1, 4, ShuffledTeamList[6], 0, ShuffledTeamList[7], 0, false, false, false);
+                    j, i, 4, ShuffledTeamList[6], 0, ShuffledTeamList[7], 0, false, false, false);
+                    j += 1;
 
             }
         }

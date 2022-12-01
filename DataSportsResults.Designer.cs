@@ -30,6 +30,10 @@ namespace MyFirstForm {
         
         private TeamsInLeagueDataTable tableTeamsInLeague;
         
+        private global::System.Data.DataRelation relationMatchHistoryTeamAID_TeamsInLeague;
+        
+        private global::System.Data.DataRelation relationMatchHistoryTeamBID_TeamsInLeague;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -242,6 +246,8 @@ namespace MyFirstForm {
                     this.tableTeamsInLeague.InitVars();
                 }
             }
+            this.relationMatchHistoryTeamAID_TeamsInLeague = this.Relations["MatchHistoryTeamAID_TeamsInLeague"];
+            this.relationMatchHistoryTeamBID_TeamsInLeague = this.Relations["MatchHistoryTeamBID_TeamsInLeague"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +264,22 @@ namespace MyFirstForm {
             base.Tables.Add(this.tableMatchHistory);
             this.tableTeamsInLeague = new TeamsInLeagueDataTable();
             base.Tables.Add(this.tableTeamsInLeague);
+            global::System.Data.ForeignKeyConstraint fkc;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_LeagueLadderTeamId_TeamsInLeague", new global::System.Data.DataColumn[] {
+                        this.tableLeagueLadder.TeamIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTeamsInLeague.TeamIdColumn});
+            this.tableTeamsInLeague.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            this.relationMatchHistoryTeamAID_TeamsInLeague = new global::System.Data.DataRelation("MatchHistoryTeamAID_TeamsInLeague", new global::System.Data.DataColumn[] {
+                        this.tableMatchHistory.TeamAIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTeamsInLeague.TeamIdColumn}, false);
+            this.Relations.Add(this.relationMatchHistoryTeamAID_TeamsInLeague);
+            this.relationMatchHistoryTeamBID_TeamsInLeague = new global::System.Data.DataRelation("MatchHistoryTeamBID_TeamsInLeague", new global::System.Data.DataColumn[] {
+                        this.tableMatchHistory.TeamBIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTeamsInLeague.TeamIdColumn}, false);
+            this.Relations.Add(this.relationMatchHistoryTeamBID_TeamsInLeague);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -349,7 +371,9 @@ namespace MyFirstForm {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class LeagueLadderDataTable : global::System.Data.TypedTableBase<LeagueLadderRow> {
             
-            private global::System.Data.DataColumn columnTeam;
+            private global::System.Data.DataColumn columnLadderPosId;
+            
+            private global::System.Data.DataColumn columnTeamId;
             
             private global::System.Data.DataColumn columnMatchesPlayed;
             
@@ -402,9 +426,17 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn TeamColumn {
+            public global::System.Data.DataColumn LadderPosIdColumn {
                 get {
-                    return this.columnTeam;
+                    return this.columnLadderPosId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TeamIdColumn {
+                get {
+                    return this.columnTeamId;
                 }
             }
             
@@ -509,10 +541,11 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public LeagueLadderRow AddLeagueLadderRow(string Team, int MatchesPlayed, int GamesWon, int GamesDrawn, int GamesLost, int GoalsFor, int GoalsAgainst, int GoalDifference, int LeaguePoints) {
+            public LeagueLadderRow AddLeagueLadderRow(int LadderPosId, int TeamId, int MatchesPlayed, int GamesWon, int GamesDrawn, int GamesLost, int GoalsFor, int GoalsAgainst, int GoalDifference, int LeaguePoints) {
                 LeagueLadderRow rowLeagueLadderRow = ((LeagueLadderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Team,
+                        LadderPosId,
+                        TeamId,
                         MatchesPlayed,
                         GamesWon,
                         GamesDrawn,
@@ -543,7 +576,8 @@ namespace MyFirstForm {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnTeam = base.Columns["Team"];
+                this.columnLadderPosId = base.Columns["LadderPosId"];
+                this.columnTeamId = base.Columns["TeamId"];
                 this.columnMatchesPlayed = base.Columns["MatchesPlayed"];
                 this.columnGamesWon = base.Columns["GamesWon"];
                 this.columnGamesDrawn = base.Columns["GamesDrawn"];
@@ -557,8 +591,10 @@ namespace MyFirstForm {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnTeam = new global::System.Data.DataColumn("Team", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTeam);
+                this.columnLadderPosId = new global::System.Data.DataColumn("LadderPosId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLadderPosId);
+                this.columnTeamId = new global::System.Data.DataColumn("TeamId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTeamId);
                 this.columnMatchesPlayed = new global::System.Data.DataColumn("MatchesPlayed", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMatchesPlayed);
                 this.columnGamesWon = new global::System.Data.DataColumn("GamesWon", typeof(int), null, global::System.Data.MappingType.Element);
@@ -575,6 +611,13 @@ namespace MyFirstForm {
                 base.Columns.Add(this.columnGoalDifference);
                 this.columnLeaguePoints = new global::System.Data.DataColumn("LeaguePoints", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLeaguePoints);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("LeagueLadderKey", new global::System.Data.DataColumn[] {
+                                this.columnLadderPosId}, false));
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnTeamId}, false));
+                this.columnLadderPosId.Unique = true;
+                this.columnTeamId.AllowDBNull = false;
+                this.columnTeamId.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -714,11 +757,11 @@ namespace MyFirstForm {
             
             private global::System.Data.DataColumn columnMatchNumber;
             
-            private global::System.Data.DataColumn columnTeamAName;
+            private global::System.Data.DataColumn columnTeamAId;
             
             private global::System.Data.DataColumn columnTeamAScore;
             
-            private global::System.Data.DataColumn columnTeamBName;
+            private global::System.Data.DataColumn columnTeamBId;
             
             private global::System.Data.DataColumn columnTeamBScore;
             
@@ -787,9 +830,9 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn TeamANameColumn {
+            public global::System.Data.DataColumn TeamAIdColumn {
                 get {
-                    return this.columnTeamAName;
+                    return this.columnTeamAId;
                 }
             }
             
@@ -803,9 +846,9 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn TeamBNameColumn {
+            public global::System.Data.DataColumn TeamBIdColumn {
                 get {
-                    return this.columnTeamBName;
+                    return this.columnTeamBId;
                 }
             }
             
@@ -878,15 +921,15 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MatchHistoryRow AddMatchHistoryRow(int GameId, int RoundNumber, int MatchNumber, string TeamAName, int TeamAScore, string TeamBName, int TeamBScore, bool IsTeamAWin, bool IsTeamBWin, bool IsDraw) {
+            public MatchHistoryRow AddMatchHistoryRow(int GameId, int RoundNumber, int MatchNumber, int TeamAId, int TeamAScore, int TeamBId, int TeamBScore, bool IsTeamAWin, bool IsTeamBWin, bool IsDraw) {
                 MatchHistoryRow rowMatchHistoryRow = ((MatchHistoryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         GameId,
                         RoundNumber,
                         MatchNumber,
-                        TeamAName,
+                        TeamAId,
                         TeamAScore,
-                        TeamBName,
+                        TeamBId,
                         TeamBScore,
                         IsTeamAWin,
                         IsTeamBWin,
@@ -916,9 +959,9 @@ namespace MyFirstForm {
                 this.columnGameId = base.Columns["GameId"];
                 this.columnRoundNumber = base.Columns["RoundNumber"];
                 this.columnMatchNumber = base.Columns["MatchNumber"];
-                this.columnTeamAName = base.Columns["TeamAName"];
+                this.columnTeamAId = base.Columns["TeamAId"];
                 this.columnTeamAScore = base.Columns["TeamAScore"];
-                this.columnTeamBName = base.Columns["TeamBName"];
+                this.columnTeamBId = base.Columns["TeamBId"];
                 this.columnTeamBScore = base.Columns["TeamBScore"];
                 this.columnIsTeamAWin = base.Columns["IsTeamAWin"];
                 this.columnIsTeamBWin = base.Columns["IsTeamBWin"];
@@ -934,12 +977,12 @@ namespace MyFirstForm {
                 base.Columns.Add(this.columnRoundNumber);
                 this.columnMatchNumber = new global::System.Data.DataColumn("MatchNumber", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMatchNumber);
-                this.columnTeamAName = new global::System.Data.DataColumn("TeamAName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTeamAName);
+                this.columnTeamAId = new global::System.Data.DataColumn("TeamAId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTeamAId);
                 this.columnTeamAScore = new global::System.Data.DataColumn("TeamAScore", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTeamAScore);
-                this.columnTeamBName = new global::System.Data.DataColumn("TeamBName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTeamBName);
+                this.columnTeamBId = new global::System.Data.DataColumn("TeamBId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTeamBId);
                 this.columnTeamBScore = new global::System.Data.DataColumn("TeamBScore", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTeamBScore);
                 this.columnIsTeamAWin = new global::System.Data.DataColumn("IsTeamAWin", typeof(bool), null, global::System.Data.MappingType.Element);
@@ -948,6 +991,9 @@ namespace MyFirstForm {
                 base.Columns.Add(this.columnIsTeamBWin);
                 this.columnIsDraw = new global::System.Data.DataColumn("IsDraw", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsDraw);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("MatchHistoryKey", new global::System.Data.DataColumn[] {
+                                this.columnGameId}, false));
+                this.columnGameId.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1081,6 +1127,8 @@ namespace MyFirstForm {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class TeamsInLeagueDataTable : global::System.Data.TypedTableBase<TeamsInLeagueRow> {
             
+            private global::System.Data.DataColumn columnTeamId;
+            
             private global::System.Data.DataColumn columnTeamName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1114,6 +1162,14 @@ namespace MyFirstForm {
             protected TeamsInLeagueDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TeamIdColumn {
+                get {
+                    return this.columnTeamId;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1164,10 +1220,18 @@ namespace MyFirstForm {
             public TeamsInLeagueRow AddTeamsInLeagueRow(string TeamName) {
                 TeamsInLeagueRow rowTeamsInLeagueRow = ((TeamsInLeagueRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        null,
                         TeamName};
                 rowTeamsInLeagueRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTeamsInLeagueRow);
                 return rowTeamsInLeagueRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public TeamsInLeagueRow FindByTeamId(int TeamId) {
+                return ((TeamsInLeagueRow)(this.Rows.Find(new object[] {
+                            TeamId})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1187,14 +1251,23 @@ namespace MyFirstForm {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
+                this.columnTeamId = base.Columns["TeamId"];
                 this.columnTeamName = base.Columns["TeamName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
+                this.columnTeamId = new global::System.Data.DataColumn("TeamId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTeamId);
                 this.columnTeamName = new global::System.Data.DataColumn("TeamName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTeamName);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("TeamsInLeagueKey1", new global::System.Data.DataColumn[] {
+                                this.columnTeamId}, true));
+                this.columnTeamId.AutoIncrement = true;
+                this.columnTeamId.AutoIncrementSeed = 1;
+                this.columnTeamId.AllowDBNull = false;
+                this.columnTeamId.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1337,17 +1410,28 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Team {
+            public int LadderPosId {
                 get {
                     try {
-                        return ((string)(this[this.tableLeagueLadder.TeamColumn]));
+                        return ((int)(this[this.tableLeagueLadder.LadderPosIdColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Team\' in table \'LeagueLadder\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'LadderPosId\' in table \'LeagueLadder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableLeagueLadder.TeamColumn] = value;
+                    this[this.tableLeagueLadder.LadderPosIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int TeamId {
+                get {
+                    return ((int)(this[this.tableLeagueLadder.TeamIdColumn]));
+                }
+                set {
+                    this[this.tableLeagueLadder.TeamIdColumn] = value;
                 }
             }
             
@@ -1481,14 +1565,14 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsTeamNull() {
-                return this.IsNull(this.tableLeagueLadder.TeamColumn);
+            public bool IsLadderPosIdNull() {
+                return this.IsNull(this.tableLeagueLadder.LadderPosIdColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetTeamNull() {
-                this[this.tableLeagueLadder.TeamColumn] = global::System.Convert.DBNull;
+            public void SetLadderPosIdNull() {
+                this[this.tableLeagueLadder.LadderPosIdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1652,17 +1736,17 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string TeamAName {
+            public int TeamAId {
                 get {
                     try {
-                        return ((string)(this[this.tableMatchHistory.TeamANameColumn]));
+                        return ((int)(this[this.tableMatchHistory.TeamAIdColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TeamAName\' in table \'MatchHistory\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TeamAId\' in table \'MatchHistory\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMatchHistory.TeamANameColumn] = value;
+                    this[this.tableMatchHistory.TeamAIdColumn] = value;
                 }
             }
             
@@ -1684,17 +1768,17 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string TeamBName {
+            public int TeamBId {
                 get {
                     try {
-                        return ((string)(this[this.tableMatchHistory.TeamBNameColumn]));
+                        return ((int)(this[this.tableMatchHistory.TeamBIdColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TeamBName\' in table \'MatchHistory\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TeamBId\' in table \'MatchHistory\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMatchHistory.TeamBNameColumn] = value;
+                    this[this.tableMatchHistory.TeamBIdColumn] = value;
                 }
             }
             
@@ -1800,14 +1884,14 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsTeamANameNull() {
-                return this.IsNull(this.tableMatchHistory.TeamANameColumn);
+            public bool IsTeamAIdNull() {
+                return this.IsNull(this.tableMatchHistory.TeamAIdColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetTeamANameNull() {
-                this[this.tableMatchHistory.TeamANameColumn] = global::System.Convert.DBNull;
+            public void SetTeamAIdNull() {
+                this[this.tableMatchHistory.TeamAIdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1824,14 +1908,14 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsTeamBNameNull() {
-                return this.IsNull(this.tableMatchHistory.TeamBNameColumn);
+            public bool IsTeamBIdNull() {
+                return this.IsNull(this.tableMatchHistory.TeamBIdColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetTeamBNameNull() {
-                this[this.tableMatchHistory.TeamBNameColumn] = global::System.Convert.DBNull;
+            public void SetTeamBIdNull() {
+                this[this.tableMatchHistory.TeamBIdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1881,6 +1965,28 @@ namespace MyFirstForm {
             public void SetIsDrawNull() {
                 this[this.tableMatchHistory.IsDrawColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public TeamsInLeagueRow[] GetTeamsInLeagueRowsByMatchHistoryTeamAID_TeamsInLeague() {
+                if ((this.Table.ChildRelations["MatchHistoryTeamAID_TeamsInLeague"] == null)) {
+                    return new TeamsInLeagueRow[0];
+                }
+                else {
+                    return ((TeamsInLeagueRow[])(base.GetChildRows(this.Table.ChildRelations["MatchHistoryTeamAID_TeamsInLeague"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public TeamsInLeagueRow[] GetTeamsInLeagueRowsByMatchHistoryTeamBID_TeamsInLeague() {
+                if ((this.Table.ChildRelations["MatchHistoryTeamBID_TeamsInLeague"] == null)) {
+                    return new TeamsInLeagueRow[0];
+                }
+                else {
+                    return ((TeamsInLeagueRow[])(base.GetChildRows(this.Table.ChildRelations["MatchHistoryTeamBID_TeamsInLeague"])));
+                }
+            }
         }
         
         /// <summary>
@@ -1899,6 +2005,17 @@ namespace MyFirstForm {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int TeamId {
+                get {
+                    return ((int)(this[this.tableTeamsInLeague.TeamIdColumn]));
+                }
+                set {
+                    this[this.tableTeamsInLeague.TeamIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string TeamName {
                 get {
                     try {
@@ -1910,6 +2027,28 @@ namespace MyFirstForm {
                 }
                 set {
                     this[this.tableTeamsInLeague.TeamNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public MatchHistoryRow MatchHistoryRowByMatchHistoryTeamAID_TeamsInLeague {
+                get {
+                    return ((MatchHistoryRow)(this.GetParentRow(this.Table.ParentRelations["MatchHistoryTeamAID_TeamsInLeague"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MatchHistoryTeamAID_TeamsInLeague"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public MatchHistoryRow MatchHistoryRowByMatchHistoryTeamBID_TeamsInLeague {
+                get {
+                    return ((MatchHistoryRow)(this.GetParentRow(this.Table.ParentRelations["MatchHistoryTeamBID_TeamsInLeague"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MatchHistoryTeamBID_TeamsInLeague"]);
                 }
             }
             

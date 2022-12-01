@@ -29,6 +29,7 @@ namespace MyFirstForm
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grpBoxGame1 = new System.Windows.Forms.GroupBox();
             this.btnradioGame1Team1 = new System.Windows.Forms.RadioButton();
             this.spinbxGame1Team1 = new System.Windows.Forms.NumericUpDown();
@@ -59,11 +60,26 @@ namespace MyFirstForm
             this.LadderPointsAgainst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LadderPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LadderLeaguePoints = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblRoundString = new System.Windows.Forms.Label();
             this.lblRoundInt = new System.Windows.Forms.Label();
+            this.matchHistoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSportsResults = new MyFirstForm.DataSportsResults();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.teamIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teamNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teamsInLeagueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.matchHistoryBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.gameIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roundNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matchNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teamAIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teamAScoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teamBIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teamBScoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isTeamAWinDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.isTeamBWinDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.isDrawDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.grpBoxGame1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame1Team1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame1Team2)).BeginInit();
@@ -77,7 +93,12 @@ namespace MyFirstForm
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame4Team1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame4Team2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewLadder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchHistoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSportsResults)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teamsInLeagueBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchHistoryBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // grpBoxGame1
@@ -392,28 +413,6 @@ namespace MyFirstForm
             this.LadderLeaguePoints.Name = "LadderLeaguePoints";
             this.LadderLeaguePoints.Width = 60;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            this.dataGridView1.Location = new System.Drawing.Point(897, 24);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 14;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            // 
             // lblRoundString
             // 
             this.lblRoundString.AutoSize = true;
@@ -433,14 +432,141 @@ namespace MyFirstForm
             this.lblRoundInt.TabIndex = 16;
             this.lblRoundInt.Text = "0";
             // 
+            // matchHistoryBindingSource
+            // 
+            this.matchHistoryBindingSource.DataMember = "MatchHistory";
+            this.matchHistoryBindingSource.DataSource = this.dataSportsResults;
+            // 
+            // dataSportsResults
+            // 
+            this.dataSportsResults.DataSetName = "DataSportsResults";
+            this.dataSportsResults.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.teamIdDataGridViewTextBoxColumn,
+            this.teamNameDataGridViewTextBoxColumn});
+            this.dataGridView2.DataSource = this.teamsInLeagueBindingSource;
+            this.dataGridView2.Location = new System.Drawing.Point(909, 194);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView2.TabIndex = 18;
+            // 
+            // teamIdDataGridViewTextBoxColumn
+            // 
+            this.teamIdDataGridViewTextBoxColumn.DataPropertyName = "TeamId";
+            this.teamIdDataGridViewTextBoxColumn.HeaderText = "TeamId";
+            this.teamIdDataGridViewTextBoxColumn.Name = "teamIdDataGridViewTextBoxColumn";
+            // 
+            // teamNameDataGridViewTextBoxColumn
+            // 
+            this.teamNameDataGridViewTextBoxColumn.DataPropertyName = "TeamName";
+            this.teamNameDataGridViewTextBoxColumn.HeaderText = "TeamName";
+            this.teamNameDataGridViewTextBoxColumn.Name = "teamNameDataGridViewTextBoxColumn";
+            // 
+            // teamsInLeagueBindingSource
+            // 
+            this.teamsInLeagueBindingSource.DataMember = "TeamsInLeague";
+            this.teamsInLeagueBindingSource.DataSource = this.dataSportsResults;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gameIdDataGridViewTextBoxColumn,
+            this.roundNumberDataGridViewTextBoxColumn,
+            this.matchNumberDataGridViewTextBoxColumn,
+            this.teamAIdDataGridViewTextBoxColumn,
+            this.teamAScoreDataGridViewTextBoxColumn,
+            this.teamBIdDataGridViewTextBoxColumn,
+            this.teamBScoreDataGridViewTextBoxColumn,
+            this.isTeamAWinDataGridViewCheckBoxColumn,
+            this.isTeamBWinDataGridViewCheckBoxColumn,
+            this.isDrawDataGridViewCheckBoxColumn});
+            this.dataGridView1.DataSource = this.matchHistoryBindingSource1;
+            this.dataGridView1.Location = new System.Drawing.Point(909, 24);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(481, 150);
+            this.dataGridView1.TabIndex = 19;
+            // 
+            // matchHistoryBindingSource1
+            // 
+            this.matchHistoryBindingSource1.DataMember = "MatchHistory";
+            this.matchHistoryBindingSource1.DataSource = this.dataSportsResults;
+            // 
+            // gameIdDataGridViewTextBoxColumn
+            // 
+            this.gameIdDataGridViewTextBoxColumn.DataPropertyName = "GameId";
+            this.gameIdDataGridViewTextBoxColumn.HeaderText = "GameId";
+            this.gameIdDataGridViewTextBoxColumn.Name = "gameIdDataGridViewTextBoxColumn";
+            // 
+            // roundNumberDataGridViewTextBoxColumn
+            // 
+            this.roundNumberDataGridViewTextBoxColumn.DataPropertyName = "RoundNumber";
+            this.roundNumberDataGridViewTextBoxColumn.HeaderText = "RoundNumber";
+            this.roundNumberDataGridViewTextBoxColumn.Name = "roundNumberDataGridViewTextBoxColumn";
+            // 
+            // matchNumberDataGridViewTextBoxColumn
+            // 
+            this.matchNumberDataGridViewTextBoxColumn.DataPropertyName = "MatchNumber";
+            this.matchNumberDataGridViewTextBoxColumn.HeaderText = "MatchNumber";
+            this.matchNumberDataGridViewTextBoxColumn.Name = "matchNumberDataGridViewTextBoxColumn";
+            // 
+            // teamAIdDataGridViewTextBoxColumn
+            // 
+            this.teamAIdDataGridViewTextBoxColumn.DataPropertyName = "TeamAId";
+            this.teamAIdDataGridViewTextBoxColumn.HeaderText = "TeamAId";
+            this.teamAIdDataGridViewTextBoxColumn.Name = "teamAIdDataGridViewTextBoxColumn";
+            // 
+            // teamAScoreDataGridViewTextBoxColumn
+            // 
+            this.teamAScoreDataGridViewTextBoxColumn.DataPropertyName = "TeamAScore";
+            this.teamAScoreDataGridViewTextBoxColumn.HeaderText = "TeamAScore";
+            this.teamAScoreDataGridViewTextBoxColumn.Name = "teamAScoreDataGridViewTextBoxColumn";
+            // 
+            // teamBIdDataGridViewTextBoxColumn
+            // 
+            this.teamBIdDataGridViewTextBoxColumn.DataPropertyName = "TeamBId";
+            this.teamBIdDataGridViewTextBoxColumn.HeaderText = "TeamBId";
+            this.teamBIdDataGridViewTextBoxColumn.Name = "teamBIdDataGridViewTextBoxColumn";
+            // 
+            // teamBScoreDataGridViewTextBoxColumn
+            // 
+            this.teamBScoreDataGridViewTextBoxColumn.DataPropertyName = "TeamBScore";
+            this.teamBScoreDataGridViewTextBoxColumn.HeaderText = "TeamBScore";
+            this.teamBScoreDataGridViewTextBoxColumn.Name = "teamBScoreDataGridViewTextBoxColumn";
+            // 
+            // isTeamAWinDataGridViewCheckBoxColumn
+            // 
+            this.isTeamAWinDataGridViewCheckBoxColumn.DataPropertyName = "IsTeamAWin";
+            this.isTeamAWinDataGridViewCheckBoxColumn.HeaderText = "IsTeamAWin";
+            this.isTeamAWinDataGridViewCheckBoxColumn.Name = "isTeamAWinDataGridViewCheckBoxColumn";
+            // 
+            // isTeamBWinDataGridViewCheckBoxColumn
+            // 
+            this.isTeamBWinDataGridViewCheckBoxColumn.DataPropertyName = "IsTeamBWin";
+            this.isTeamBWinDataGridViewCheckBoxColumn.HeaderText = "IsTeamBWin";
+            this.isTeamBWinDataGridViewCheckBoxColumn.Name = "isTeamBWinDataGridViewCheckBoxColumn";
+            // 
+            // isDrawDataGridViewCheckBoxColumn
+            // 
+            this.isDrawDataGridViewCheckBoxColumn.DataPropertyName = "IsDraw";
+            this.isDrawDataGridViewCheckBoxColumn.HeaderText = "IsDraw";
+            this.isDrawDataGridViewCheckBoxColumn.Name = "isDrawDataGridViewCheckBoxColumn";
+            // 
             // SportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1335, 534);
+            this.ClientSize = new System.Drawing.Size(1434, 534);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.lblRoundInt);
             this.Controls.Add(this.lblRoundString);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.gridViewLadder);
             this.Controls.Add(this.btnRandomScores);
             this.Controls.Add(this.btnSubmitScores);
@@ -470,7 +596,12 @@ namespace MyFirstForm
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame4Team1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinbxGame4Team2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewLadder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchHistoryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSportsResults)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teamsInLeagueBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchHistoryBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -513,11 +644,26 @@ namespace MyFirstForm
         private System.Windows.Forms.DataGridViewTextBoxColumn LadderPointsAgainst;
         private System.Windows.Forms.DataGridViewTextBoxColumn LadderPercentage;
         private System.Windows.Forms.DataGridViewTextBoxColumn LadderLeaguePoints;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.Label lblRoundString;
         private System.Windows.Forms.Label lblRoundInt;
+        private System.Windows.Forms.BindingSource matchHistoryBindingSource;
+        private DataSportsResults dataSportsResults;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn teamIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn teamNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource teamsInLeagueBindingSource;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gameIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn roundNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn matchNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn teamAIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn teamAScoreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn teamBIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn teamBScoreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isTeamAWinDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isTeamBWinDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isDrawDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.BindingSource matchHistoryBindingSource1;
     }
 }
 

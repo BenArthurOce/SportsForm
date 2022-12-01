@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +12,7 @@ using System.Windows.Forms;
 using MyFirstForm.FormAssets;
 using MyFirstForm.RoundRobinAssets;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 
 namespace MyFirstForm
@@ -22,7 +25,7 @@ namespace MyFirstForm
 
         //  private AllTeams AllTeamClass2 = new AllTeams( new Dictionary<string, TeamClass>());
 
-        Tournament tourny = new Tournament();
+        Tournament Tournament = new Tournament();
 
         // Radiobutton List
         private IList<RadioButton> ListRadioButtons = new List<RadioButton>();
@@ -44,6 +47,25 @@ namespace MyFirstForm
             // Create lists of Radiobuttons and NumericUpDowns
             CreateRadioButtonList();
             CreateSpinBoxList();
+
+            // DataSet 1
+            dataGridView1.DataSource = Tournament.dtMatchHistory;
+            BindingSource source1 = new BindingSource();
+            source1.DataSource = Tournament.dtMatchHistory;
+            dataGridView1.DataSource = source1;
+
+            // DataSet 2
+            dataGridView2.DataSource = Tournament.dtTeamNames;
+            BindingSource source2 = new BindingSource();
+            source2.DataSource = Tournament.dtTeamNames;
+            dataGridView2.DataSource = source2;
+
+            // DataSet 3
+            gridViewLadder.DataSource = Tournament.dtLeagueLadder;
+            BindingSource source3 = new BindingSource();
+            source3.DataSource = Tournament.dtLeagueLadder;
+            gridViewLadder.DataSource = source3;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -102,6 +124,9 @@ namespace MyFirstForm
             }
         }
 
+
+
+
         // 
         // Clicking New Round Button
         // 
@@ -112,10 +137,31 @@ namespace MyFirstForm
             ResetSpinBoxes();
             // FillRadioButtons();
 
-            tourny.IncreaseRoundByOne();
-            lblRoundInt.Text = tourny.CurrentRound.ToString();
-            FillFormRadioButtons(tourny.CurrentRound);
+            Tournament.IncreaseRoundByOne();
+            lblRoundInt.Text = Tournament.CurrentRound.ToString();
+            FillFormRadioButtons(Tournament.CurrentRound);
 
+            // dataGridView1.Items.Refresh();
+
+            RefreshDataTables();
+
+
+
+
+            /*
+            SqlConnection sqlconn = new SqlConnection("Data Source=.;Initial catalog=sports2;Integrated Security=true");
+            SqlCommand sqlcmd = new SqlCommand("select table1.id");
+            SqlDataAdapter sqlda = new SqlDataAdapter();
+            sqlda.SelectCommand = sqlcmd;
+            DataTable dt = new DataTable();
+            sqlda.Fill(dt);
+            dataGridView1.DataSource = dt;
+            */
+
+
+
+
+            /*
             DataSportsResults.LeagueLadderDataTable dtc = new DataSportsResults.LeagueLadderDataTable();
             DataSportsResults.LeagueLadderRow dr = dtc.NewLeagueLadderRow();
             dr["Team"] = "Jetsons";
@@ -126,36 +172,10 @@ namespace MyFirstForm
                 Console.WriteLine("Result = {0} {1} {2} {3} {4} {5} {6} {7} {8}", r["Team"], r["MatchesPlayed"], r["GamesWon"], r["GamesDrawn"], r["GamesLost"], r["GoalsFor"], r["GoalsAgainst"], r["GoalDifference"], r["LeaguePoints"]);
 
             Console.Read();
-
-
-
-            /*
-
-            // Testing Multi Key Dictionary
-
-            var TestDict = new Dictionary<(int, int), string>();
-
-            // Add
-            TestDict.Add((1, 2), "onetwo");
-            TestDict.Add((2, 4), "twofour");
-            TestDict.Add((1, 7), "oneseven");
-
-            // Get
-            string a = TestDict[(1, 7)];
-
-            // Multi Key Dictionary
-            // The two keys (int) are round number and match number
-            // The value is yet to be determind but it needs to be winningTeam,LosingTeam,WinningScore,LosingScore
-            // Don't make the value a class, as the raw dictionary data could maybe be dataset in the future?
-
-            tourny.MatchHistory.Add((3, 2), "threetwo");
-            tourny.MatchHistory.Add((4, 5), "fourfive");
-            string b = tourny.MatchHistory[(4, 5)];
-            MessageBox.Show(b);
-
             */
 
         }
+
 
         private void FillFormRadioButtons(int i)
         {
@@ -169,8 +189,8 @@ namespace MyFirstForm
                     ListRadioButtonsMatch.Add(rBtn);
                 }
 
-                ListRadioButtonsMatch[0].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamA.TeamName.ToString();
-                ListRadioButtonsMatch[1].Text = tourny.ListOfRounds[i].ListOfMatches[m].TeamB.TeamName.ToString();
+                ListRadioButtonsMatch[0].Text = Tournament.ListOfRounds[i].ListOfMatches[m].TeamA.TeamName.ToString();
+                ListRadioButtonsMatch[1].Text = Tournament.ListOfRounds[i].ListOfMatches[m].TeamB.TeamName.ToString();
 
                 m += 1;
             }
@@ -304,11 +324,44 @@ namespace MyFirstForm
             return numberChecked == 4;
         }
 
+        public void FindUpdateRow()
+        {
+            foreach (DataRow dr in Tournament.dtTeamNames.Rows) // search whole table
+            {
+                if (dr[columnName: "TeamId"].ToString() == "2") // if id==2
+                {
+                    dr["TeamName"] = "Fakers"; //change the name
+                                                //break; break or not depending on you
+                }
+            }
+        }
 
 
 
+        public void RefreshDataTables()
+        {
+            FindUpdateRow();
+            dataGridView1.Refresh();
+            dataGridView2.Refresh();
+            gridViewLadder.Refresh();
+            IList<string> testlist = GetTeamsThatArePlaying(3, 2);
+        }
 
-
+        public IList<String> GetTeamsThatArePlaying(int RoundNum, int MatchNum)
+        {
+            foreach (DataRow dr in Tournament.dtMatchHistory.Rows) // search whole table
+            {
+                if  (dr[columnName: "RoundNumber"].ToString() == RoundNum.ToString() && 
+                    (dr[columnName: "MatchNumber"].ToString() == MatchNum.ToString())) // if id==2
+                {
+                    List <string> resultList = new List<string>();
+                    resultList.Add(dr["TeamAId"].ToString());
+                    resultList.Add(dr["TeamBId"].ToString());
+                    return resultList;
+                }
+            }
+            return new List<string>();
+        }
 
 
         // Sorts the ladder - Should be its own class?
